@@ -4,10 +4,13 @@ import (
 	"context"
 	"fmt"
 	"net/url"
+	"os"
+	"strconv"
 
 	"github.com/Songmu/gitconfig"
 	"github.com/gofri/go-github-ratelimit/github_ratelimit"
 	"github.com/google/go-github/v66/github"
+	"github.com/jferrl/go-githubauth"
 	"golang.org/x/oauth2"
 )
 
@@ -20,6 +23,15 @@ func ghClient(ctx context.Context, token, host string) (*github.Client, error) {
 		}
 	}
 	ts := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: token})
+
+	privateKey := []byte(os.Getenv("GITHUB_APP_PRIVATE_KEY"))
+	appIdStr := os.Getenv("GITHUB_APP_ID")
+	appId, err := strconv.ParseInt(appIdStr, 10, 64)
+	appTokenSource, err := githubauth.NewApplicationTokenSource(appId, privateKey)
+	appInstallationIdStr := os.Getenv("GITHUB_APP_INSTALLATION_ID")
+	appInstallationId, err := strconv.ParseInt(appInstallationIdStr, 10, 64)
+	ts = githubauth.NewInstallationTokenSource(appInstallationId, appTokenSource)
+
 	oauthClient := oauth2.NewClient(ctx, ts)
 	rateLimiter, err := github_ratelimit.NewRateLimitWaiterClient(oauthClient.Transport)
 	if err != nil {

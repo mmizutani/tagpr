@@ -1,8 +1,8 @@
 module github.com/Songmu/tagpr
 
-go 1.22.0
+go 1.23
 
-toolchain go1.23.2
+toolchain go1.23.3
 
 require (
 	github.com/Masterminds/semver/v3 v3.3.0
@@ -11,6 +11,7 @@ require (
 	github.com/Songmu/gitsemvers v0.0.3
 	github.com/gofri/go-github-ratelimit v1.1.0
 	github.com/google/go-github/v66 v66.0.0
+	github.com/jferrl/go-githubauth v1.1.1
 	github.com/saracen/walker v0.1.4
 	golang.org/x/oauth2 v0.23.0
 )
@@ -20,6 +21,8 @@ require (
 	github.com/cli/safeexec v1.0.1 // indirect
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/goccy/go-yaml v1.12.0 // indirect
+	github.com/golang-jwt/jwt/v5 v5.2.1 // indirect
+	github.com/google/go-github/v64 v64.0.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/jessevdk/go-flags v1.6.1 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
